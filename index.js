@@ -67,9 +67,10 @@ app.post('/webhook/', function (req, res) {
 				randomJoke(sender);
 			
 			}
-			 	/* else if(text.includes('help')) {
-				runHelp();
-			}*/
+		    else if(text.includes('help')) {
+				console.log('help');
+				runHelp(sender);
+			}
 			/*new code end */
 
 			if (text === 'Generic'){ 
@@ -77,7 +78,7 @@ app.post('/webhook/', function (req, res) {
 				//sendGenericMessage(sender)
 				continue
 			}
-			sendTextMessage(sender, "Welcome to theBase! Your message is important to us. We will get back to you soon. Your message:\n " + text.substring(0, 200)+" \nwill be taken care!");
+			sendTextMessage(sender, "Welcome to theBase! Your message is important to us. We will get back to you soon. Your message:\n " + text.substring(0, 200)+" \nwill be taken care! enter Help to get more ..");
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
@@ -96,6 +97,11 @@ function randomJoke(sender) {
         
       })
 };
+function runHelp(sender) {
+      
+			sendTextMessage(sender, '1. inspire me \n 2. random joke \n 3. help');
+};
+
 
 function inspireMe(sender) {
     axios.get('https://raw.githubusercontent.com/BolajiAyodeji/inspireNuggets/master/src/quotes.json')
