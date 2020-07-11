@@ -62,11 +62,12 @@ app.post('/webhook/', function (req, res) {
 				console.log('inspire me');
 				inspireMe(sender);
 			}
-				/*
-			} 
 			else if(text.includes('random joke')) {
-				randomJoke();
-			} else if(text.includes('help')) {
+				console.log('random joke');
+				randomJoke(sender);
+			
+			}
+			 	/* else if(text.includes('help')) {
 				runHelp();
 			}*/
 			/*new code end */
@@ -80,12 +81,21 @@ app.post('/webhook/', function (req, res) {
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
-			sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
+			sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token);
 			continue
 		}
 	}
 	res.sendStatus(200)
 });
+
+function randomJoke(sender) {
+    axios.get('https://api.chucknorris.io/jokes/random')
+      .then(res => {
+            const joke = res.data.value;
+			sendTextMessage(sender, `${joke} `);
+        
+      })
+};
 
 function inspireMe(sender) {
     axios.get('https://raw.githubusercontent.com/BolajiAyodeji/inspireNuggets/master/src/quotes.json')
