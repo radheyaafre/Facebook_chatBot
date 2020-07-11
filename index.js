@@ -9,6 +9,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const dotenv= require('dotenv');
+const axios= require('axios');
 dotenv.config({path: './config.env'}); 
 const app = express()
 
@@ -54,6 +55,22 @@ app.post('/webhook/', function (req, res) {
 			let text = event.message.text
 			console.log(text);
 			console.log('Got the messgae: ',text);
+
+
+			/* new code  */ 
+			if(text.includes('inspire me')) {
+				console.log('inspire me');
+				inspireMe();
+			}
+				/*
+			} 
+			else if(text.includes('random joke')) {
+				randomJoke();
+			} else if(text.includes('help')) {
+				runHelp();
+			}*/
+			/*new code end */
+
 			if (text === 'Generic'){ 
 				console.log("welcome to chatbot")
 				//sendGenericMessage(sender)
@@ -70,7 +87,25 @@ app.post('/webhook/', function (req, res) {
 	res.sendStatus(200)
 });
 
+function inspireMe() {
+    axios.get('https://raw.githubusercontent.com/BolajiAyodeji/inspireNuggets/master/src/quotes.json')
+      .then(res => {
+            const quotes = res.data;
+            const random = Math.floor(Math.random() * quotes.length);
+            const quote = quotes[random].quote
+            const author = quotes[random].author
 
+			sendTextMessage(sender, `${quote} ${author} `);
+		   /*
+			bot.postMessageToChannel(
+                'random',
+                `:zap: ${quote} - *${author}*`,
+                params
+			);
+			*/
+
+      })
+}
 
 // recommended to inject access tokens as environmental variables, e.g.
 // const token = process.env.FB_PAGE_ACCESS_TOKEN
