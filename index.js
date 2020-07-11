@@ -99,7 +99,7 @@ function randomJoke(sender) {
 };
 function runHelp(sender) {
       
-			sendTextMessage(sender, '1. inspire me \n 2. random joke \n 3. help');
+			sendTextMessage(sender, ' enter any of the below keyword:\n inspire me \n  random joke \n  help');
 };
 
 
