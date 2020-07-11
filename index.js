@@ -8,6 +8,8 @@ i have added console.log on line 48
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
+const dotenv= require('dotenv');
+dotenv.config({path: './config.env'}); 
 const app = express()
 
 console.log('in applicatoin');
@@ -63,7 +65,7 @@ app.post('/webhook/', function (req, res) {
 
 // recommended to inject access tokens as environmental variables, e.g.
 // const token = process.env.FB_PAGE_ACCESS_TOKEN
-const token = "EAAlgQCxpPp0BAJKDASNQfc3oJvvLFyiGLhcgqLP2gcR1On5zfwyYpzj64r08w7DAVqfooBYjxfdS2NIWZAPl1d2t8OkMeH4JBjUI5TZCqrea4gNyZBW8HgfSEnfF84ZCBfCriFqQXCIxlNDPYUfm3WbZCS5tybHGHNjS7Wg3cbAZDZD";
+const token = process.env.PAGE_ACCESS_TOKEN;
 
 function sendTextMessage(sender, text) {
 	let messageData = { text:text }
