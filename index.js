@@ -126,14 +126,13 @@ function inspireMe(sender) {
 // recommended to inject access tokens as environmental variables, e.g.
 // const token = process.env.FB_PAGE_ACCESS_TOKEN
 
-const imageUrl = app.get('https://picsum.photos/200').then(res => {
-	return res;
-})
 
 
 function sendTextMessage(sender, text) {
 	let messageData = { text:text }
-	let url = imageUrl;
+	let url = app.get('https://picsum.photos/200', (req, res)=>{
+			return res;
+	});
 	
 	request({
 	    url: 'https://graph.facebook.com/v2.6/me/messages',
