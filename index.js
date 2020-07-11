@@ -44,7 +44,8 @@ app.post('/webhook/', function (req, res) {
 	console.log('My fb app');
 	let messaging_events = req.body.entry[0].messaging
 	for (let i = 0; i < messaging_events.length; i++) {
-		let event = req.body.entry[0].messaging[i]
+		let event = req.body.entry[0].messaging[i];
+		console.log('Got the messgae: ',event.message.text);
 		console.log('sender',event.sender);
 		let sender = event.sender.id;
 		if (event.message && event.message.text) {
