@@ -32,6 +32,7 @@ app.get('/', function (req, res) {
 // for facebook verification
 app.get('/webhook/', function (req, res) {
 	if (req.query['hub.verify_token'] === process.env.MY_VERYFY_FB_TOKEN) {
+		console.log('Mssgnder calling me');
 		res.send(req.query['hub.challenge'])
 	} else {
 		res.send('Error, wrong token')
@@ -40,6 +41,7 @@ app.get('/webhook/', function (req, res) {
 
 // to post data
 app.post('/webhook/', function (req, res) {
+	console.log('My fb app');
 	let messaging_events = req.body.entry[0].messaging
 	for (let i = 0; i < messaging_events.length; i++) {
 		let event = req.body.entry[0].messaging[i]
