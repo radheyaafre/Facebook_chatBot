@@ -55,7 +55,7 @@ app.post('/webhook/', function (req, res) {
 				//sendGenericMessage(sender)
 				continue
 			}
-			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+			sendTextMessage(sender, "Welcome to theBase! Your message is important to us. We will get back to you soon. Your messaged: " + text.substring(0, 200)+" Will respond soon");
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
@@ -64,7 +64,8 @@ app.post('/webhook/', function (req, res) {
 		}
 	}
 	res.sendStatus(200)
-})
+});
+
 
 
 // recommended to inject access tokens as environmental variables, e.g.
