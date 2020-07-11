@@ -126,9 +126,14 @@ function inspireMe(sender) {
 // recommended to inject access tokens as environmental variables, e.g.
 // const token = process.env.FB_PAGE_ACCESS_TOKEN
 
+const imageUrl = app.get('https://picsum.photos/200').then(res => {
+	return res;
+})
+
 
 function sendTextMessage(sender, text) {
 	let messageData = { text:text }
+	let url = imageUrl;
 	
 	request({
 	    url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -142,7 +147,8 @@ function sendTextMessage(sender, text) {
 					type: 'image',
 					payload: {
 						is_reusable: true,
-						url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/LT_471_%28LTZ_1471%29_Arriva_London_New_Routemaster_%2819522859218%29.jpg/2560px-LT_471_%28LTZ_1471%29_Arriva_London_New_Routemaster_%2819522859218%29.jpg'
+						url: url
+						// url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/LT_471_%28LTZ_1471%29_Arriva_London_New_Routemaster_%2819522859218%29.jpg/2560px-LT_471_%28LTZ_1471%29_Arriva_London_New_Routemaster_%2819522859218%29.jpg'
 					}
 				}
 			}
