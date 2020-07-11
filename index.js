@@ -55,7 +55,7 @@ app.post('/webhook/', function (req, res) {
 				//sendGenericMessage(sender)
 				continue
 			}
-			sendTextMessage(sender, "Welcome to theBase! Your message is important to us. We will get back to you soon. Your messaged: " + text.substring(0, 200)+" Will respond soon");
+			sendTextMessage(sender, "Welcome to theBase! Your message is important to us. We will get back to you soon. Your messaged:\n " + text.substring(0, 200)+" \nwill be taken care!");
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
