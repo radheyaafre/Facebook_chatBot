@@ -23,10 +23,10 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 // parse application/json
 app.use(bodyParser.json())
-
+const token = process.env.PAGE_ACCESS_TOKEN;
 // index
 app.get('/', function (req, res) {
-	res.send(`hello world i am a secret bot ${PAGE_ACCESS_TOKEN} ${MY_VERYFY_FB_TOKEN}`);
+	res.send(`hello world i am a secret bot ${token} ${process.env.MY_VERYFY_FB_TOKEN}`);
 })
 
 // for facebook verification
@@ -65,7 +65,7 @@ app.post('/webhook/', function (req, res) {
 
 // recommended to inject access tokens as environmental variables, e.g.
 // const token = process.env.FB_PAGE_ACCESS_TOKEN
-const token = process.env.PAGE_ACCESS_TOKEN;
+
 
 function sendTextMessage(sender, text) {
 	let messageData = { text:text }
