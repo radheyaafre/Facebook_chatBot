@@ -131,12 +131,21 @@ function sendTextMessage(sender, text) {
 	let messageData = { text:text }
 	
 	request({
-		url: 'https://graph.facebook.com/v2.6/me/messages',
+	    url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
 		method: 'POST',
 		json: {
 			recipient: {id:sender},
-			message: messageData,
+			// : messageData, --comented for now
+			message: {
+				attachment:{
+					type: 'image',
+					payload: {
+						is_reusable: true,
+						url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/LT_471_%28LTZ_1471%29_Arriva_London_New_Routemaster_%2819522859218%29.jpg/2560px-LT_471_%28LTZ_1471%29_Arriva_London_New_Routemaster_%2819522859218%29.jpg'
+					}
+				}
+			}
 		}
 	}, function(error, response, body) {
 		if (error) {
