@@ -60,7 +60,7 @@ app.post('/webhook/', function (req, res) {
 			/* new code  */ 
 			if(text.includes('inspire me')) {
 				console.log('inspire me');
-				inspireMe();
+				inspireMe(sender);
 			}
 				/*
 			} 
@@ -87,7 +87,7 @@ app.post('/webhook/', function (req, res) {
 	res.sendStatus(200)
 });
 
-function inspireMe() {
+function inspireMe(sender) {
     axios.get('https://raw.githubusercontent.com/BolajiAyodeji/inspireNuggets/master/src/quotes.json')
       .then(res => {
             const quotes = res.data;
